@@ -10,12 +10,17 @@ public class Main
     // Элементы массива вывести в консоль, разделяя точкой с запятой.
     public static void ArrayOddNumbers()
     {
+        Scanner input = new Scanner(System.in);
+        System.out.println("Введите число: ");
+        int one = input.nextInt();
         int[] array = new int[10];
-        for(int i = 0; i < 10; i++)
+        array[0] = one + (one & 1) ^ 1;
+        for (int i = 1; i < 10; i++)
         {
-            array[i] = 2*i+1;
-            System.out.print(array[i]+"; ");
+            array[i] = array[i-1] + (array[i-1] & 1) ^ 1;;
         }
+        for (int i = 0; i < 10; i++)
+            System.out.print(array[i]+"; ");
         System.out.println();
     }
 
