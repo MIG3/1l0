@@ -27,20 +27,30 @@ public class Main
     // Найти наименьший элемент массива, введенного с клавиатуры,
     // вывести наименьшее и наибольшее числа, а также их позиции в массиве.
     // Поменять в массиве, введенном с клавиатуры, наибольший и наименьший элементы массива местами.
-    public static void MaxToMinElements()
+    public static <var> void MaxToMinElements()
     {
         Scanner input = new Scanner(System.in);
         System.out.println("Введите длину массива: ");
         int size = input.nextInt();
-        int array[] = new int[size];
-        System.out.println("Введите элементы массива: ");
+        double array[] = new double[size];
+        System.out.println("Введите элементы массива (дробные через ,): ");
         for (int i = 0; i < size; i++)
         {
-            array[i] = input.nextInt();
+            array[i] = input.nextDouble();
+//            System.out.print(array[i]+"; ");
         }
 
-        int min = Arrays.stream(array).min().getAsInt();
-        int max = Arrays.stream(array).max().getAsInt();
+//        double min = Arrays.stream(array).min().getAsDouble();
+//        double max = Arrays.stream(array).max().getAsDouble();
+        double min = array[0];
+        double max = array[0];
+        for (double num : array)
+        {
+            if (num < min)
+                min = num;
+            else if (num > max)
+                max = num;
+        }
 
         int minPos = 0, maxPos = 0;
         for (int i = 0; i < array.length; i++)
@@ -53,12 +63,12 @@ public class Main
         System.out.println("Min element = " + min + ", position = " + minPos);
         System.out.println("Max element = " + max + ", position = " + maxPos);
 
-        int temp = array[maxPos];
+        double temp = array[maxPos];
         array[maxPos] = array[minPos];
         array[minPos] = temp;
         
         System.out.println("Массив после перестановки минимальных и максимальных значений местами: ");
-        for (int item: array)
+        for (double item: array)
         {
             System.out.print(item + "; ");
         }
@@ -69,15 +79,15 @@ public class Main
     // введенного с клавиатуры. Вывести в консоль результаты.
     public static void Matrix()
     {
-        int avg = 0;
+        double avg = 0;
         Scanner input = new Scanner(System.in);
         System.out.println("Введите количество строк: ");
         int row = input.nextInt();
         System.out.println("Введите количество столбцов: ");
         int column = input.nextInt();
-        int[][] array = getMatrix(System.in, column, row);
+        double[][] array = getMatrix(System.in, column, row);
 
-        for (int[] line : array)
+        for (double[] line : array)
         {
             System.out.println(Arrays.toString(line));
         }
@@ -85,7 +95,7 @@ public class Main
         System.out.println("Среднее арифметическое каждой строки: ");
         for (int i = 0; i < row; i++)
         {
-            int temp = 0;
+            double temp = 0;
             for (int j = 0; j < column; j++)
                 temp += array[i][j];
             avg = temp / column;
@@ -94,14 +104,15 @@ public class Main
     }
 
 
-    static int[][] getMatrix(InputStream is, int x, int y)
+    static double[][] getMatrix(InputStream is, int x, int y)
     {
-        int[][] array = new int[y][];
+        double[][] array = new double[y][];
+        System.out.println("Введите матрицу: ");
         Scanner scanner = new Scanner(System.in);
         for (int i = 0; i < y; i++) {
-            array[i] = new int[x];
+            array[i] = new double[x];
             for (int j = 0; j < x; j++) {
-                array[i][j] = scanner.nextInt();
+                array[i][j] = scanner.nextDouble();
             }
         }
 
@@ -110,8 +121,8 @@ public class Main
 
     public static void main(String[] args)
     {
-        ArrayOddNumbers();
-        MaxToMinElements();
+//        ArrayOddNumbers();
+//        MaxToMinElements();
         Matrix();
     }
 }
